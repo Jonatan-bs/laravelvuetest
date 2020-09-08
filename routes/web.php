@@ -13,12 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
-Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
-Route::get('/post/create', 'PostsController@create');
-Route::post('/post', 'PostsController@store');
+Route::post('/follows/{user}', 'FollowsController@store');
+
+Route::get('/profiles/{user}', 'ProfilesController@index')->name('profile.show');
+Route::get('/profiles/{user}/edit', 'ProfilesController@edit');
+Route::patch('/profiles/{user}', 'ProfilesController@update');
+
+Route::get('/', 'PostsController@index');
+Route::get('/posts/create', 'PostsController@create');
+Route::post('/posts', 'PostsController@store');
+Route::get('/posts/{post}', 'PostsController@show');
